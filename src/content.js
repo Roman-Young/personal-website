@@ -132,7 +132,7 @@ export const built = {
         'A personal portfolio built as a flown journey through a voxel world. Five camera scenes generated from my own AI art, with a scroll-scrubbed opening dive built on an all-intra video pipeline; a React 19 + Vite front end, hand-authored, no templates.',
       tags: ['React', 'Vite', 'GSAP', 'ffmpeg'],
       repo: 'https://github.com/Roman-Young/personal-website',
-      demo: null, // the live URL, added once the domain exists
+      demo: 'https://personal-website-seven-chi-65.vercel.app',
       image: null,
       accent: '#f0a24a',
     },
