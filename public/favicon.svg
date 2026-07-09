@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Clean R with a voxel bite -->
+  <rect width="32" height="32" rx="6" fill="#1e2433"/>
+  <g transform="translate(9.2 7)">
+    <g fill="#f2ede3">
+      <rect x="0" y="0" width="4.4" height="18"/>
+      <path d="M4.4 0 h4.4 a5.2 5.2 0 0 1 0 10.4 h-4.4 z"/>
+      <polygon points="5.6,10.4 9.9,10.4 14.4,18 9.9,18"/>
+    </g>
+    <g fill="#1e2433">
+      <path d="M4.4 3.4 h4.2 a1.8 1.8 0 0 1 0 3.6 h-4.2 z"/>
+      <rect x="11.2" y="0" width="2.9" height="2.9"/>
+    </g>
+  </g>
+</svg>

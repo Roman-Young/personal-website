@@ -1,0 +1,17 @@
+node_modules
+dist
+.DS_Store
+*.local
+.vercel
+
+# Local Claude Code tooling (not part of the site)
+.claude/
+scratchpad/
+
+# internal working notes, kept local only
+PLAN.md
+HANDOFF.md
+CONTENT-INTAKE.md
+CONTINUE-HERE.md
+plan/
+Frame1_Ref.mp4

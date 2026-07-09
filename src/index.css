@@ -1,0 +1,492 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------------
+   World tokens: every color routes through these variables.
+   The defaults are the Canyon (morning). As you scroll, GSAP continuously
+   blends these variables toward each biome's palette (see PALETTES in
+   src/pages/Home.jsx): canyon morning → ocean map → oasis gold → village
+   afternoon → campfire dusk. One journey, one moving light.
+--------------------------------------------------------------------------- */
+
+:root {
+  --sky: #e9f4ee; /* page atmosphere */
+  --surface: #f8fcf9; /* cards, panels */
+  --ink: #1e3028; /* primary text */
+  --ink-soft: #51665a; /* secondary text */
+  --line: #d3e4d8; /* borders */
+  --accent: #3f8a4e; /* biome accent */
+  --accent-ink: #ffffff; /* text on accent */
+  --path: #8a6f4e; /* trail ochre: routes, details */
+}
+
+@theme inline {
+  --color-sky: var(--sky);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-inksoft: var(--ink-soft);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accentink: var(--accent-ink);
+  --color-path: var(--path);
+
+  --font-display: 'Unbounded', system-ui, sans-serif;
+  --font-body: 'Karla', system-ui, sans-serif;
+  --font-pixel: 'Silkscreen', monospace;
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-sky font-body text-ink antialiased;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--path);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------------------------------------------------------------------------
+   Components
+--------------------------------------------------------------------------- */
+
+@layer components {
+  /* waypoint label: the game's tiny pixel voice, used sparingly */
+  .kicker {
+    @apply font-pixel text-[0.72rem] tracking-[0.14em] text-accent uppercase;
+  }
+
+  .btn,
+  .btn-primary,
+  .btn-secondary,
+  .btn-ghost {
+    @apply inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-[10px] px-6 py-3 font-bold transition duration-200;
+  }
+
+  /* primary: a placed block. A light top key + a soft 2px bottom edge
+     instead of a hard slab, and a low drop shadow so it lifts off art */
+  .btn-primary {
+    @apply bg-accent text-accentink hover:-translate-y-px hover:brightness-105 active:translate-y-px;
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.24),
+      inset 0 -2px 0 rgb(0 0 0 / 0.26),
+      0 6px 16px -8px rgb(0 0 0 / 0.55);
+  }
+  .btn-primary:hover {
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.28),
+      inset 0 -2px 0 rgb(0 0 0 / 0.26),
+      0 11px 24px -8px rgb(0 0 0 / 0.55);
+  }
+  .btn-primary:active {
+    box-shadow: inset 0 2px 5px rgb(0 0 0 / 0.3);
+  }
+
+  /* secondary: the on-art companion to primary. Frosted glass with a light
+     top edge, a real hover fill, and a press state */
+  .btn-secondary {
+    @apply border text-white backdrop-blur-sm hover:-translate-y-px active:translate-y-px;
+    background: rgb(255 255 255 / 0.09);
+    border-color: rgb(255 255 255 / 0.22);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.12);
+  }
+  .btn-secondary:hover {
+    background: rgb(255 255 255 / 0.17);
+    border-color: rgb(255 255 255 / 0.42);
+  }
+  .btn-secondary:active {
+    background: rgb(255 255 255 / 0.12);
+  }
+
+  /* ghost: light-chrome button (resume page). Quiet, soft bottom edge,
+     accent on hover */
+  .btn-ghost {
+    @apply border border-line bg-surface text-ink backdrop-blur-sm hover:-translate-y-px hover:border-accent hover:text-accent active:translate-y-px;
+    box-shadow: inset 0 -2px 0 rgb(0 0 0 / 0.06);
+  }
+
+  .card {
+    @apply rounded-xl border border-line bg-surface p-6 shadow-[0_2px_10px_rgb(0_0_0/0.05),inset_0_-3px_0_rgb(0_0_0/0.04)] transition duration-300;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-md border border-line bg-surface px-3 py-1.5 text-sm font-semibold text-inksoft;
+  }
+
+  /* -----------------------------------------------------------------------
+     Panel family: one language for every block that sits on the world.
+     Intrinsic sizing only (padding + max-width + gap), so a panel can never
+     be smaller than its content. Semi-transparent dark glass (~64% opaque) so the scene reads
+     through it; a light top glass-edge + a soft placed-block bottom edge and
+     a deep drop shadow so it reads as a refined, floating pane.
+  ----------------------------------------------------------------------- */
+  .panel {
+    @apply rounded-[18px] border border-white/15 p-6 text-white backdrop-blur-xl sm:p-7;
+    background: rgb(11 15 13 / 0.64);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.09),
+      inset 0 -2px 0 rgb(0 0 0 / 0.22),
+      0 22px 50px -24px rgb(0 0 0 / 0.6);
+  }
+
+  /* editorial hierarchy: kicker / title / lead / body / meta */
+  .panel-kicker {
+    @apply font-pixel text-[0.62rem] tracking-[0.18em] text-white/70 uppercase;
+  }
+  .panel-title {
+    @apply font-display text-xl font-bold tracking-tight text-balance sm:text-2xl;
+  }
+  .panel-lead {
+    @apply text-base leading-relaxed text-white/85;
+  }
+  .panel-body {
+    @apply leading-relaxed text-white/85;
+  }
+  .panel-meta {
+    @apply font-pixel text-[0.62rem] tracking-[0.15em] text-white/60 uppercase;
+  }
+
+  /* slot-style tag chip: a shallow inventory-slot well */
+  .panel-chip {
+    @apply inline-flex items-center rounded-md px-2.5 py-1 text-sm font-semibold text-white;
+    background: rgb(255 255 255 / 0.12);
+    box-shadow:
+      inset 0 0 0 1px rgb(255 255 255 / 0.1),
+      inset 0 2px 4px rgb(0 0 0 / 0.25);
+  }
+
+  /* words set directly on moving art get a grounding shadow */
+  .on-art {
+    text-shadow:
+      0 2px 16px rgb(0 0 0 / 0.55),
+      0 0 3px rgb(0 0 0 / 0.4);
+  }
+
+  /* the game nametag: translucent slab, pixel text */
+  .nametag {
+    @apply font-pixel inline-block rounded-[3px] bg-black/45 px-3 py-1 text-white;
+    text-shadow: 0 0 6px rgb(0 0 0 / 0.5);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Scene seams: short, eased blends only where two scenes actually meet.
+   'sky' melts art into the page atmosphere; '.feather-dark' melts art into
+   a dusk neutral where two dark scenes touch (village → campfire). On pinned
+   flight stages the blend is additionally gated to the seam moment via
+   --progress (.feather-track-*), so no fog sits over a scene mid-visit.
+--------------------------------------------------------------------------- */
+
+.feather-top,
+.feather-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 4rem;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.feather-top {
+  top: 0;
+  background: linear-gradient(
+    to bottom,
+    var(--sky),
+    color-mix(in srgb, var(--sky) 45%, transparent) 52%,
+    transparent
+  );
+}
+
+.feather-bottom {
+  bottom: 0;
+  background: linear-gradient(
+    to top,
+    var(--sky),
+    color-mix(in srgb, var(--sky) 45%, transparent) 52%,
+    transparent
+  );
+}
+
+/* the day→night seam needs real distance to read as dusk falling rather
+   than a cut: much taller than the sky blends, with an eased ramp (village
+   side) and a matching emergence (campfire side) out of the same dusk tone */
+.feather-top.feather-dark {
+  height: 12rem;
+  background: linear-gradient(
+    to bottom,
+    rgb(18 14 26),
+    rgb(18 14 26 / 0.82) 26%,
+    rgb(18 14 26 / 0.5) 52%,
+    rgb(18 14 26 / 0.22) 76%,
+    transparent
+  );
+}
+
+.feather-bottom.feather-dark {
+  height: 15rem;
+  background: linear-gradient(
+    to top,
+    rgb(18 14 26),
+    rgb(18 14 26 / 0.85) 24%,
+    rgb(18 14 26 / 0.55) 48%,
+    rgb(18 14 26 / 0.28) 72%,
+    rgb(18 14 26 / 0.09) 88%,
+    transparent
+  );
+}
+
+/* pinned-stage gating: the top seam belongs to the arrival (fades out as the
+   flight gets underway), the bottom seam to the departure (fades in just
+   before the track releases the stage) */
+.feather-track-top {
+  opacity: clamp(0, calc(1 - var(--progress, 0) * 8), 1);
+}
+
+.feather-track-bottom {
+  opacity: clamp(0, calc((var(--progress, 0) - 0.88) * 14), 1);
+}
+
+/* destination pill: visible only while actually flying; appears once the
+   flight is underway, leaves when the camera settles (--settle per biome) */
+.destination {
+  opacity: min(
+    clamp(0, calc((var(--progress, 0) - 0.15) * 5), 1),
+    clamp(0, calc((var(--settle, 0.45) + 0.03 - var(--progress, 0)) * 12), 1)
+  );
+}
+
+/* -------------------------------------------------------------------------
+   In-biome choreography: after the camera settles, the biome's header and
+   its cards live INSIDE the scene. Slides swap one at a time (data-state
+   set by BiomeTrack); the header arrives once and stays.
+--------------------------------------------------------------------------*/
+
+.biome-header {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.5s ease-out,
+    transform 0.5s cubic-bezier(0.22, 0.9, 0.35, 1.15);
+}
+
+[data-settled='true'] .biome-header {
+  opacity: 1;
+  transform: none;
+}
+
+.slide {
+  opacity: 0;
+  transform: translateY(30px) scale(0.985);
+  transition:
+    opacity 0.4s ease-out,
+    transform 0.45s cubic-bezier(0.22, 0.9, 0.35, 1.18);
+  pointer-events: none;
+}
+
+.slide[data-state='active'] {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.slide[data-state='past'] {
+  opacity: 0;
+  transform: translateY(-24px) scale(0.985);
+}
+
+/* -------------------------------------------------------------------------
+   The village conveyor: a real horizontal scroller that Conveyor.jsx
+   drifts via scrollLeft (user scrolling folds in additively; see the
+   component for the whole choreography). No scrollbar; the belt is the
+   affordance, and soft masks feather its edges into the scene.
+--------------------------------------------------------------------------*/
+
+.conveyor {
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    black 4%,
+    black 96%,
+    transparent
+  );
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+
+.conveyor::-webkit-scrollbar {
+  display: none;
+}
+
+/* project detail dialog: the browser owns centering, top layer, focus trap;
+   the panel inside owns the look */
+.project-modal {
+  margin: auto;
+  border: none;
+  padding: 0;
+  background: transparent;
+  max-width: none;
+  max-height: none;
+  overflow: visible;
+}
+
+.project-modal::backdrop {
+  background: rgb(8 10 9 / 0.62);
+  backdrop-filter: blur(3px);
+}
+
+/* map flags: planted one by one once the island settles */
+.map-flag {
+  opacity: 0;
+  transform: scale(0) translateY(-10px);
+  transform-origin: bottom left;
+  transition:
+    opacity 0.3s ease-out,
+    transform 0.45s cubic-bezier(0.3, 1.6, 0.4, 1);
+  transition-delay: var(--flag-delay, 0s);
+  pointer-events: none;
+}
+
+[data-settled='true'] .map-flag {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+/* project houses raise themselves block by block when their card arrives */
+@keyframes block-pop {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.slide[data-state='active'] .block-cell {
+  animation: block-pop 0.22s cubic-bezier(0.3, 1.8, 0.4, 1) both;
+  animation-delay: calc(0.15s + var(--i, 0) * 0.04s);
+}
+
+/* embers only rise once the campfire scene has settled */
+[data-settled='true'] .ember {
+  animation-play-state: running;
+}
+.ember {
+  animation-play-state: paused;
+}
+
+/* hero words assemble as you fly: each span sets --t (its moment) and rises
+   into place as the flight's --progress passes it */
+.fly-word {
+  --k: clamp(0, calc((var(--progress, 0) - var(--t, 0)) * 7), 1);
+  opacity: var(--k);
+  transform: translateY(calc((1 - var(--k)) * 16px));
+  display: inline-block;
+}
+
+/* things that should quietly leave as the flight begins (scroll cue) */
+.fly-fade-out {
+  opacity: clamp(0, calc(1 - var(--progress, 0) * 5), 1);
+}
+
+/* -------------------------------------------------------------------------
+   The dive → About hard handoff. Both sides are pure functions of the
+   scroll --progress, so the greeting and the About block can NEVER be
+   visible in the same frame, at any scroll speed:
+
+     greeting (.flight-only)  fully gone by  settleAt − 0.05
+     block    (.settle-block) starts rising  settleAt + 0.03
+--------------------------------------------------------------------------*/
+
+/* the flight-only greeting (nametag + welcome): assembled during the fall,
+   then whipped away just before the camera settles */
+.flight-only {
+  opacity: clamp(0, calc((var(--settle, 0.45) - 0.05 - var(--progress, 0)) * 20), 1);
+}
+
+/* the About block: ONE composed unit, one translate+fade for the whole
+   thing (no internal stagger). Rises in after settle, holds, and exits as
+   one piece on reverse scroll. */
+.settle-block {
+  --r: clamp(0, calc((var(--progress, 0) - (var(--settle, 0.45) + 0.03)) * 13), 1);
+  opacity: var(--r);
+  transform: translateY(calc((1 - var(--r)) * 26px));
+  pointer-events: none;
+}
+[data-settled='true'] .settle-block {
+  pointer-events: auto;
+}
+
+/* ---------------------------------------------------------------------------
+   Gentle ambient motion
+--------------------------------------------------------------------------- */
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(7px);
+  }
+}
+
+.bob {
+  animation: bob 2.4s ease-in-out infinite;
+}
+
+@keyframes ember {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(-46vh) translateX(var(--drift, 12px)) scale(0.4);
+    opacity: 0;
+  }
+}
+
+.ember {
+  animation: ember var(--dur, 6s) linear infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+/* ---------------------------------------------------------------------------
+   Accessibility & print
+--------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #111;
+  }
+}
