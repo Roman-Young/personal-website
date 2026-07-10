@@ -125,7 +125,7 @@ export const built = {
     },
     {
       name: 'This World',
-      status: 'Under construction',
+      status: 'Built',
       description:
         'The site you’re exploring: a scroll-driven journey through a world I generated from my own AI art.',
       modal:
@@ -134,7 +134,7 @@ export const built = {
       repo: 'https://github.com/Roman-Young/personal-website',
       demo: 'https://personal-website-seven-chi-65.vercel.app',
       image: null,
-      accent: '#f0a24a',
+      accent: '#5cbf72',
     },
   ],
 }
