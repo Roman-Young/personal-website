@@ -3,7 +3,7 @@ import { ArrowUpRight } from 'lucide-react'
 import AmbientScene from '../components/AmbientScene.jsx'
 import Conveyor from '../components/Conveyor.jsx'
 import ProjectModal from '../components/ProjectModal.jsx'
-import { built, statusColor } from '../content.js'
+import { built } from '../content.js'
 
 /**
  * One project card: the whole thing is a button that opens the detail
@@ -21,7 +21,7 @@ function ProjectCard({ item, onOpen, className = '' }) {
       className={`panel flex cursor-pointer flex-col text-left transition duration-200 hover:-translate-y-1.5 hover:scale-[1.045] hover:brightness-110 ${className}`}
       style={{ borderLeft: `4px solid ${accent}` }}
     >
-      <p className="panel-meta" style={{ color: statusColor(status) ?? accent }}>
+      <p className="panel-meta" style={{ color: accent }}>
         {status}
       </p>
       <h3 className="font-display mt-1.5 text-lg font-bold tracking-tight text-balance">
