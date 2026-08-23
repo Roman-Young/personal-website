@@ -106,7 +106,7 @@ export default function ProjectModal({ project, onClose }) {
                   className="btn btn-secondary"
                 >
                   <ExternalLink className="h-4 w-4" aria-hidden="true" />
-                  Live demo
+                  Try it out!
                 </a>
               )}
             </div>
