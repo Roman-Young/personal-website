@@ -99,14 +99,14 @@ export const built = {
     },
     {
       name: 'LabReach',
-      status: 'Under construction',
+      status: 'Built',
       description:
         'A RAG system over hundreds of university labs that turns an hour of manual research per lab into a quote-backed, ranked digest served in seconds.',
       modal:
         'LabReach is a RAG system that removes the 30 to 60 minutes of reading it takes to cold-email one lab. The ingestion pipeline crawls each UCSD lab with Firecrawl, pulls its papers from PubMed, OpenAlex, and Europe PMC, summarizes them into quote-anchored chunks, and embeds them into Neon Postgres with pgvector, across hundreds of labs in 13 departments. At query time it runs hybrid retrieval, Gemini dense embeddings and Postgres full-text search fused with reciprocal-rank fusion, to surface the passages that fit a given student. That feeds a two-stage digest: a fit-ranked lab list that expands into full per-lab research, every claim tied to a verbatim source. Extraction and ranking span Claude and Gemini. The design comes from 53 cold emails I tracked over two years, where replies followed which lab I picked, not how well I wrote.',
       tags: ['Next.js', 'TypeScript', 'Postgres + pgvector', 'Hybrid RAG (dense + FTS)', 'Firecrawl', 'Claude + Gemini'],
       repo: null, // stays private until it is good enough to run
-      demo: null,
+      demo: 'https://labreach.vercel.app',
       image: null, // drop a screenshot/GIF in /public and point here as the proof-it-works
       accent: '#f0a24a',
     },
