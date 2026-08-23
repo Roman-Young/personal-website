@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { ExternalLink, Github, X } from 'lucide-react'
+import { statusColor } from '../content.js'
 
 /**
  * Project detail view, built on native <dialog>.showModal(): the platform
@@ -46,7 +47,12 @@ export default function ProjectModal({ project, onClose }) {
           }}
         >
           <div className="min-w-0">
-            <p className="panel-kicker">{status}</p>
+            <p
+              className="panel-kicker"
+              style={statusColor(status) ? { color: statusColor(status) } : undefined}
+            >
+              {status}
+            </p>
             <h3
               id="project-modal-title"
               className="font-display mt-1 text-xl font-bold tracking-tight text-balance sm:text-2xl"
@@ -106,7 +112,7 @@ export default function ProjectModal({ project, onClose }) {
                   className="btn btn-secondary"
                 >
                   <ExternalLink className="h-4 w-4" aria-hidden="true" />
-                  Live demo
+                  Try it out!
                 </a>
               )}
             </div>

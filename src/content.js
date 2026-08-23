@@ -4,6 +4,12 @@
  * ============================================================================
  */
 
+// Status-label color is SEMANTIC, not the card's accent: a shipped project
+// (Built / Live) reads green; anything still in progress falls back to the
+// card accent. Convention documented in the website-update skill.
+export const statusColor = (status) =>
+  /^(built|live)$/i.test((status || '').trim()) ? '#5cbf72' : null
+
 export const site = {
   name: 'Roman Young',
   firstName: 'Roman',
