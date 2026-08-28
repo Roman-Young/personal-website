@@ -6,7 +6,7 @@ import { ExternalLink, Github, X } from 'lucide-react'
  * provides the focus trap, Esc-to-close, top-layer stacking, and focus
  * return to the card that opened it. We add backdrop-click close and a body
  * scroll lock. Repo/demo buttons and the image slot simply don't render
- * when their field is null (LabReach ships with all three null for now).
+ * when their field is null.
  */
 export default function ProjectModal({ project, onClose }) {
   const dialogRef = useRef(null)
