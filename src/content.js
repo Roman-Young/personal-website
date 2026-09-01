@@ -36,7 +36,7 @@ export const explorer = {
   subline: 'I build computational tools for biology.',
   // The About bio: the journey into code, then where it is heading.
   paragraphs: [
-    'I’m a bioinformatics student at UC San Diego, and what I mostly do is build computational tools for biology and perform data analysis for various experiments in Immunology. My journey began with a love of biology (and even pre-med considerations); that came first. However, my passion for science is actually what pulled me in a new direction: into code, machine learning, and Artificial Intelligence.',
+    'I’m a bioinformatics student at UC San Diego, and what I mostly do is build computational tools for biology and perform data analysis for various experiments in Immunology. My journey began with a love of biology, specifically immunology and drug discovery research (and even pre-med considerations). That was the beginning. However, my passion for science is actually what pulled me in a direction that can expand on these interests in unique ways: into data analysis, code, and Artificial Intelligence.',
     'Right now I’m working to move from academia into biotech and pharma, but more than anything, I’m here to explore.',
   ],
   photoCaption: 'Geisel Library · UC San Diego',
@@ -44,7 +44,7 @@ export const explorer = {
     { label: 'Studying', value: 'Bioinformatics' },
     { label: 'Minor', value: 'Computer Science' },
     { label: 'Class of', value: '2028' },
-    { label: 'GPA', value: '4.00' },
+    { label: 'GPA', value: '3.975' },
   ],
   // identity-at-a-glance skill chips (not the full resume)
   provisions: [
@@ -152,55 +152,47 @@ export const contact = {
  */
 export const resume = {
   summary:
-    'Bioinformatics undergraduate at UC San Diego (Computer Science minor, 4.00 GPA, Class of 2028) building computational tools for biology: from an indel-aware peptide-matching algorithm in Rust to machine-learning tumor classifiers. Seeking research and industry roles across biotech and pharma.',
+    'Bioinformatics undergraduate at UC San Diego (Computer Science minor, 3.975 GPA, Class of 2028) building computational tools for biology: from an indel-aware peptide-matching algorithm in Rust to machine-learning tumor classifiers. Seeking research and industry roles across biotech and pharma.',
   education: [
     {
       school: 'University of California, San Diego',
       degree: 'B.S. Bioinformatics · Computer Science minor',
       dates: 'Expected 2028',
       details: [
-        '4.00 GPA · La Jolla, CA',
-        'Relevant coursework: Organic Chemistry I & II, Data Analysis for Biologists (R), Advanced Bioinformatics Lab, Discrete Math I & II, Advanced Data Structures, Linear Algebra, Probability & Statistics in Bioinformatics',
+        '3.975 GPA · La Jolla, CA',
+        'Relevant coursework: Organic Chemistry I & II, Genetics, Molecular Biology, Data Analysis for Biologists (R), Advanced Bioinformatics Lab (BWA, minimap2, SAMtools), Discrete Math I & II, Advanced Data Structures, Statistics in Bioinformatics',
       ],
     },
   ],
   experience: [
     {
+      role: 'Bioinformatics Developer',
+      org: 'La Jolla Institute for Immunology',
+      dates: 'Sept 2025 - Present · La Jolla, CA',
+      details: [
+        'Authored the indel-aware extension to PEPMatch, advancing it from substitution-only matching to full insertion/deletion alignment via a pigeonhole-seeding and bidirectional-DFS algorithm that guarantees complete recall.',
+        'Benchmarked against common aligners BLAST, DIAMOND, and MMseqs2, achieving 100% recall versus 57 to 92% for those aligners while running 50 to 100x faster on all accounts and using ~5x less memory (445MB peak vs. 2.1 to 2.3GB).',
+        'Validated correctness against an independent brute-force oracle across 86M+ exhaustive alignment pairs, backed by an ~89-test pytest suite and CI, and shipped four pull requests merged into the official IEDB/PEPMatch repository.',
+      ],
+    },
+    {
       role: 'Research Intern',
       org: 'Salk Institute for Biological Studies',
       dates: 'Mar 2025 - Present · La Jolla, CA',
       details: [
-        'Profiled IgA-coated maternal microbiota to study immune ontogeny; identified microbial targets influencing neonatal gut colonization, feeding projects on the developmental origins of immune health.',
-        'Ran gel electrophoresis and genotyping for Cre/lox transgenic mice to confirm APC-knockout efficiency.',
-        'Dissected and prepped 100+ colon and intestinal organs for antibody staining to isolate IEL, LPL, and Myeloid cells.',
+        'Contributed to the lab’s central investigation of how maternal milk microbiota shapes neonatal gut immune development, using a control vs. cross-fostered (CT/CF) mouse model to isolate nursing-derived microbial effects from genetics.',
+        'Executed end-to-end immunophenotyping on CT/CF mice: dissection, isolation of IELs and LPLs from small and large intestine, multicolor antibody staining, and flow cytometry to quantify intestinal T-cell and regulatory T-cell populations.',
+        'Analyzed multiplexed single-cell RNA-seq datasets in R/Seurat (QC, HTO demultiplexing of pooled multi-mouse samples, clustering) to resolve immune populations; presented findings at lab meetings.',
       ],
     },
     {
-      role: 'Project Lead',
-      org: 'La Jolla Institute for Immunology',
-      dates: 'Sept 2025 - Present · La Jolla, CA',
+      role: 'Creator',
+      org: 'LabReach',
+      dates: 'Mar 2026 - Present · La Jolla, CA',
       details: [
-        'Leading an indel-aware peptide-matching pipeline for the IEDB, moving PEPMatch from substitution-only to InDel-alignment for better biological realism.',
-        'Designed and implemented the indel-search algorithm in Rust (PyO3/Python bindings): pigeonhole seed-and-extend with bidirectional depth-first alignment under a configurable edit budget.',
-        'Built correctness on an independent brute-force oracle and randomized differential property testing; surfaced and fixed a real off-by-one boundary bug.',
-        'Built high-speed k-mer indexing (Python/Polars) giving up to 40,000× speedup (hours to sub-second) on 100+ queries against the full human proteome.',
-        'Ran 30 Slurm validation jobs (millions of alignments) confirming 100% sensitivity; single-indel validated end-to-end through peer review against the official IEDB repository; now extending to multi-indel and preparing the manuscript.',
-      ],
-    },
-    {
-      role: 'Doctor Shadow',
-      org: 'Kaiser Permanente',
-      dates: 'Sept 2023 - May 2024 · Fremont, CA',
-      details: [
-        'Shadowed an Internal Medicine specialist across 200+ patient encounters; observed preventative immunizations and diagnostic imaging (MRI/radiographic) workups.',
-      ],
-    },
-    {
-      role: 'Clinical Assistant',
-      org: 'Great Shape! International Dental Project',
-      dates: 'Sept 2023 - Present · San Jose / Caribbean',
-      details: [
-        'Supported humanitarian dental missions treating 220+ patients (diagnostic X-rays, cleanings, fillings, extractions); ran oral-health workshops for 800+ students.',
+        'Built a full-stack RAG system (Next.js, TypeScript, Neon Postgres + pgvector) that pre-researches 445 research labs across 5 San Diego institutions, cutting a student’s per-lab vetting from ~1 hour to seconds before a cold email.',
+        'Designed an extractive, non-generative digest that surfaces only quote-backed evidence, eliminating hallucination, and layered attribution gates that quarantined ~2,200 wrong-author papers to keep the corpus contamination-free.',
+        'Adopted by UCSD STEM clubs to run cold-email workshops, so students can identify and contact research labs at scale.',
       ],
     },
   ],
@@ -208,69 +200,53 @@ export const resume = {
     {
       role: 'Publicity Chair',
       org: 'Undergraduate Bioinformatics Club',
-      dates: 'Sept 2024 - Present',
+      dates: 'Sept 2024 - Present · La Jolla, CA',
       details: [
         'Tripled the club’s social presence (50,000+ views); ran RNA-dataset and assembly-algorithm workshops.',
       ],
     },
     {
+      role: 'Clinical Assistant',
+      org: 'Great Shape! International Dental Project',
+      dates: 'Sept 2023 - Present · San Jose, CA',
+      details: [
+        'Selected for international humanitarian missions to deliver dental care to underserved populations across the Caribbean.',
+        'Assisted chairside in the treatment of 220+ patients, supporting a range of clinical procedures including diagnostic radiographs for pathology detection, cleanings, restorative fillings, and extractions to alleviate acute oral pain and infection.',
+        'Led culturally sensitive workshops for 800+ international students, promoting preventive hygiene and long-term dental care.',
+      ],
+    },
+    {
       role: 'Project Lead',
-      org: 'Wesley United Methodist Church Mural',
-      dates: 'Aug 2023 - Apr 2024',
-      details: ['8-month commissioned mural, 500+ volunteer hours.'],
+      org: 'Eagle Scout Service Project',
+      dates: 'Aug 2023 - Apr 2024 · San Jose, CA',
+      details: [
+        'Earned Eagle Scout by leading an 8-month mural commission from concept to completion, coordinating 500+ volunteer hours and maintaining continuous communication with beneficiaries to integrate their feedback into the final design.',
+        'Developed a comprehensive risk-mitigation strategy addressing UV degradation and weather-related wear; collaborated with professional muralists to ensure the mural’s long-term structural integrity and positive themes of love and inclusivity.',
+      ],
     },
   ],
   skills: [
     {
-      group: 'Programming',
-      items: ['Python', 'Rust', 'R', 'Java', 'TypeScript / JavaScript', 'Unix'],
+      group: 'Languages',
+      items: ['Python', 'TypeScript / Next.js', 'R', 'SQL', 'Bash'],
     },
     {
-      group: 'ML / Data',
-      items: [
-        'XGBoost',
-        'scikit-learn',
-        'Optuna',
-        'Polars',
-        'NumPy / Pandas',
-        'DSPy/GEPA',
-        'Agentic LLM / tool-use',
-        'LLM-as-judge evaluation',
-      ],
+      group: 'Dev & compute',
+      items: ['Git', 'CI', 'HPC / Slurm'],
     },
     {
-      group: 'Bioinformatics',
-      items: [
-        'Sequence alignment',
-        'Proteomics',
-        'Immunoinformatics',
-        'Gene-expression analysis',
-        'HPC / Slurm',
-        'PyO3',
-      ],
+      group: 'CS',
+      items: ['Algorithm design', 'Performance benchmarking'],
     },
     {
       group: 'Wet lab',
       items: [
-        'PCR & gel electrophoresis',
-        'Antibody staining',
-        'Flow cytometry (A3 & LSRII)',
-        'FlowJo',
-        'Rodent handling & dissection',
-        'Cell culture',
-      ],
-    },
-    {
-      group: 'Interests',
-      items: [
-        'Video creation',
-        'Basketball (Lakers)',
-        'Volleyball',
-        'Thrifting',
-        'Sewing',
-        'Theatrical arts',
-        'Musicals',
-        'Karaoke',
+        'Flow cytometry',
+        'Mouse dissection & handling',
+        'ELISA / IgA assays',
+        'H&E / Alcian Blue histology',
+        'PCR',
+        'Genotyping',
       ],
     },
   ],
