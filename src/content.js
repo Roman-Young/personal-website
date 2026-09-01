@@ -36,7 +36,7 @@ export const explorer = {
   subline: 'I build computational tools for biology.',
   // The About bio: the journey into code, then where it is heading.
   paragraphs: [
-    'I’m a bioinformatics student at UC San Diego, and what I mostly do is build computational tools for biology and perform data analysis for various experiments in Immunology. My journey began with a love of biology (and even pre-med considerations). That came first. However, my passion for science is actually what pulled me in a new direction: into code, machine learning, and Artificial Intelligence.',
+    'I’m a bioinformatics student at UC San Diego, and what I mostly do is build computational tools for biology and perform data analysis for various experiments in Immunology. My journey began with a love of biology, specifically immunology and drug discovery research (and even pre-med considerations). That was the beginning. However, my passion for science is actually what pulled me in a direction that can expand on these interests in unique ways: into data analysis, code, and Artificial Intelligence.',
     'Right now I’m working to move from academia into biotech and pharma, but more than anything, I’m here to explore.',
   ],
   photoCaption: 'Geisel Library · UC San Diego',
@@ -197,6 +197,14 @@ export const resume = {
     },
   ],
   leadership: [
+    {
+      role: 'Publicity Chair',
+      org: 'Undergraduate Bioinformatics Club',
+      dates: 'Sept 2024 - Present · La Jolla, CA',
+      details: [
+        'Tripled the club’s social presence (50,000+ views); ran RNA-dataset and assembly-algorithm workshops.',
+      ],
+    },
     {
       role: 'Clinical Assistant',
       org: 'Great Shape! International Dental Project',
